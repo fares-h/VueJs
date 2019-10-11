@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="events">
+        <button @click="counter++">Increase</button>
+        <button @click="counter--">Decrease</button>
+        <button @click="secondCounter++">Increase</button>
+        <p>Counter: {{ counter }} | Second Counter {{ secondCounter }}</p>
+        <p> {{ result() }} | {{ output }}</p>
+        <p @mousemove="updateCoordinates">
+            Coordinates: {{ x }} / {{ y }}
+            - <span @mousemove="deadSpot"> DEAD SPOT with function</span>
+            - <span @mousemove.stop=""> DEAD SPOT without function </span>
+        </p>
+        <input type="text" @keyup.enter="alertMe" v-model="value"> {{ value }}
+        <input type="text" @mouseleave="alertMe">
+        <input type="text" @mouseover="alertMe">
+    </div>
+    <script src="events.js"></script>
+</body>
+</html>
