@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Styling</title>
@@ -26,11 +26,16 @@
 </head>
 <body>
     <div id="app">
+        <div class="demo" @mousemove="updateCoordinates"> scroll me</div>
         <div class="demo" @click="attachRed = !attachRed" :class="[color,{red : attachRed}]"></div>
         <div class="demo" @click="attachGreen = !attachGreen" :class="divClasses"></div>
         <div class="demo" @click="attachBlue = !attachBlue" :class="color"></div>
+        <div class="demo" :style="{backgroundColor : color}"></div>
+        <div class="demo" :style="myStyle"></div>
         <hr>
         <input type="text" v-model="color">
+        <input type="text" v-model="width">
+
     </div>
 <script src="app.js"></script>
 </body>
