@@ -18,7 +18,7 @@
     <button @click="seen = !seen"> Switch</button>
     <!-- ******* v-for **********  -->
     <ul>
-        <li v-for="ingredient in ingredients">{{ ingredient }}</li>
+        <li v-for="(ingredient,index) in ingredients">{{ ingredient}} is on place {{ index }}</li>
     </ul>
 </div>
 <script src="app.js" ></script>
