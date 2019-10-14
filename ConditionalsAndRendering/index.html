@@ -14,8 +14,9 @@
         <h2>Heading</h2>
         <div>Inside a template</div>
     </template>
+    <div v-show="seen">you see me from v-show</div>
     <button @click="seen = !seen"> Switch</button>
-</div>
+</div> //the difference between v-if and v-show is that by v-if you remove the element from the DOM, otherwise by v-show you just disable it.
 <script src="app.js" ></script>
 </body>
 </html>
