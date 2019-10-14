@@ -1,101 +1,92 @@
 new Vue({
     el : '#app',
     data : {
-        myHit : 0,
-        monsterHit : 0,
-        allHits : [],
-        isHeal : false,
-        myHealth : 100,
+
+        playerHealth : 100,
         monsterHealth : 100,
-        gameStarted : false,
-        gameEnd : false,
-        myRandom : 0,
-        monsterRandom : 0,
-        myHealthBarStyle : {
-            backgroundColor: 'green',
-            margin: 0,
-            color: 'white',
-            width: 100+ '%',
-        },
-        monsterHealthBarStyle : {
-            backgroundColor: 'green',
-            margin: 0,
-            color: 'white',
-            width: 100+ '%',
-        }
-
-
-    },
-    computed: {
-
+        gameIsRunning : false,
+        turns : [],
     },
     methods : {
         startGame : function () {
-            this.gameStarted = true;
+            this.gameIsRunning = true;
+            this.playerHealth = 100;
+            this.monsterHealth = 100;
+            this.turns = [];
         },
         attack : function () {
-            this.myRandom = Math.floor(Math.random()*(20 - 10) + 10);
-            this.monsterRandom = Math.floor(Math.random()*(20 - 10) + 10);
-            this.myHealth -= this.myRandom;
-            this.monsterHealth -= this.monsterRandom;
-            this.allHits.push(this.monsterRandom);
-            this.allHits.push(this.myRandom);
-            this.myHealthBarStyle.width = (this.myHealth)+'%';
-            this.monsterHealthBarStyle.width = (this.monsterHealth)+'%';
+            var damage = this.calculateDamage(10,3);
+            this.monsterHealth -= damage;
+            this.turns.unshift({
+               isPlayer: true,
+               text : 'Player hits Monster for '+ damage
+            });
+            if(this.checkWin()) {
+                return;
+            }
+           this.monsterAttack();
 
-            if(this.myHealth <= 0 ){
-                alert('Player lost the Game ');
-                this.gameEnd = true;
-                this.giveUp();
-            }
-            if(this.monsterHealth <= 0 ){
-                alert('Player won the Game ');
-                this.gameEnd = true;
-                this.giveUp();
-            }
-            console.log(this.myHealth);
         },
         specialAttack : function () {
-            this.myRandom = Math.floor(Math.random()*(20 - 10) + 10);
-            this.monsterRandom = Math.floor(Math.random()*(30 - 20) + 20);
-            this.myHealth -= this.myRandom;
-            this.monsterHealth -= this.monsterRandom;
-            this.allHits.push(this.monsterRandom);
-            this.allHits.push(this.myRandom);
-            this.myHealthBarStyle.width = (this.myHealth)+'%';
-            this.monsterHealthBarStyle.width = (this.monsterHealth)+'%';
-
-
-            if(this.myHealth <= 0 ){
-                alert('Player lost the Game ');
-                this.gameEnd = true;
-                this.giveUp();
+            var damage = this.calculateDamage(10,20);
+            this.monsterHealth -= damage;
+            this.turns.unshift({
+                isPlayer: true,
+                text : 'Player hits Monster for '+ damage
+            });
+            if(this.checkWin()) {
+                return;
             }
-            if(this.monsterHealth <= 0 ){
-                alert('Player won the Game ');
-                this.gameEnd = true;
-                this.giveUp();
-            }
-            //console.log(this.monsterHealth);
+           this.monsterAttack();
         },
+
         heal : function () {
-            this.myHealth += 20;
-            this.isHeal = true;
-            this.myHealthBarStyle.width = (this.myHealth)+'%';
-
+            if(this.playerHealth <=90) {
+                this.playerHealth += 10;
+            } else {
+                this.playerHealth = 100;
+            }
+            this.turns.unshift({
+                isPlayer: true,
+                text : 'Player heals for 10'
+            });
+            this.monsterAttack();
         },
+
         giveUp : function () {
-            if(this.gameEnd !== true)
-                alert('YOU GAVE UP!');
+            this.gameIsRunning = false;
+        },
+        monsterAttack : function () {
+            var damage = this.calculateDamage(12,5);
+            this.playerHealth -= damage;
+            this.checkWin();
+            this.turns.unshift({
+                isPlayer: false,
+                text : 'Monster hits Player for '+ damage
+            });
+        },
 
-            this.myHealth = 100;
-            this.monsterHealth = 100;
-            this.allHits=[];
-            this.myHealthBarStyle.width = 100+'%';
-            this.monsterHealthBarStyle.width = 100+'%';
-            this.gameStarted = false;
-            this.gameEnd = false;
+        calculateDamage : function (max, min) {
+            return Math.max(Math.floor(Math.random()* max) +1, min);
+        },
 
+        checkWin : function () {
+            if(this.monsterHealth <= 0 ){
+                 if (confirm('You won! new Game?')){
+                     this.startGame();
+                 } else {
+                     this.gameIsRunning = false;
+                 }
+                return true;
+            } else if(this.playerHealth <= 0 ){
+                if (confirm('You lost! new Game?')){
+                    this.startGame();
+                } else {
+                    this.gameIsRunning = false;
+                }
+                return true;
+            }
+            return false;
         }
     }
 
