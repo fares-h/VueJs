@@ -25,6 +25,12 @@
         <h2>{{ingredient}}</h2>
         <p>{{index}}</p>
     </template>
+    <p>loop above objects</p>
+    <ul>
+        <li v-for="person in persons">
+            <div v-for="(value, key, index) in person" >{{index}} .{{key}} : {{ value }}</div>
+        </li>
+    </ul>
 </div>
 <script src="app.js" ></script>
 </body>
