@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conditionals and Rendering</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>Do you see me?!</div>
+    <div v-if="!seen">you do not see me</div>
+    <div v-else>Now you see me</div>
+    <template v-if="seen">
+        <h2>Heading</h2>
+        <div>Inside a template</div>
+    </template>
+    <button @click="seen = !seen"> Switch</button>
+</div>
+<script src="app.js" ></script>
+</body>
+</html>
