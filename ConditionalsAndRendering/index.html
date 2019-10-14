@@ -20,6 +20,11 @@
     <ul>
         <li v-for="(ingredient,index) in ingredients">{{ ingredient}} is on place {{ index }}</li>
     </ul>
+    <p>looping from template</p>
+    <template  v-for="(ingredient,index) in ingredients">
+        <h2>{{ingredient}}</h2>
+        <p>{{index}}</p>
+    </template>
 </div>
 <script src="app.js" ></script>
 </body>
