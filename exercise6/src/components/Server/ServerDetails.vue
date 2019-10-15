@@ -11,5 +11,8 @@
 </script>
 
 <style scoped>
-
+    /* without scoped will applied in all elements */
+    div {
+        border: 1px solid red;
+    }
 </style>

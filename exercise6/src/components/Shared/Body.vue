@@ -11,8 +11,8 @@
     export default {
         name: "Body",
         components: {
-            'server': Server,
-            'server-details': ServerDetails
+            Server,
+            ServerDetails // its equal to 'server-details': ServerDetails
         }
     }
 </script>
