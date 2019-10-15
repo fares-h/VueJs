@@ -1,10 +1,15 @@
 <template>
-   <h1>{{ title }}</h1>
+    <div>
+        <h1>{{ title }}</h1>
+        <app-server></app-server>
+    </div>
+
+
 </template>
 
 <script>
 export default {
-   data() {
+   data : function (){
       return {
          title: 'Welcome to VUE.JS'
       }
