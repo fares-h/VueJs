@@ -4,13 +4,12 @@ var data = {
 };
 
 var vm1 = new Vue({
-  el: '#app1',
   data: data ,
   methods: {
     show: function() {
       this.showParagraph = true;
       this.updateTitle('The VueJS Instance (Updated)');
-      this.$refs.myButton.innerText='test';
+      //this.$refs.myButton.innerText='test';
     },
     updateTitle: function(title) {
       this.title = title;
@@ -27,20 +26,33 @@ var vm1 = new Vue({
     }
   }
 });
-console.log(vm1.$data === data);
-vm1.$refs.headingg.innerText = 'Something else';
+vm1.$mount('#app1');
+
+
+console.log(vm1);
+vm1.$refs.headingg.innerText= 'Title from refs';
 setTimeout(function () {
-  vm1.title = 'changed by the timer';
-  vm1.show();
+    vm1.title = 'changed by the timer';
+    vm1.show();
 },3000);
+
+
+
 var vm2 = new Vue({
-  el: '#app2',
-  data: {
-    title: 'The second Title'
-  },
-  methods : {
-    onChange : function () {
-      vm1.title = 'Changed'
-    }
-  }
+   el: '#app2',
+   data: {
+       title: 'Title1 from vm2 '+ vm1.title,
+   }
 });
+
+
+var vm3 = new Vue({
+   template : '<h1> Hello from vm3!</h1>'
+});
+vm3.$mount('#app3');
+
+var vm4 = new Vue({
+    template : '<h1> Hello from vm4!</h1>'
+});
+vm4.$mount('#app4');
+document.getElementById('app4').appendChild(vm4.$el);
