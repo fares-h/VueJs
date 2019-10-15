@@ -60,5 +60,42 @@ vm3.$mount('#app3');
 var vm4 = new Vue({
     template : '<h1> Hello from vm4!</h1>'
 });
-vm4.$mount('#app4');
-document.getElementById('app4').appendChild(vm4.$el);
+//vm4.$mount('#app4');
+//document.getElementById('app4').appendChild(vm4.$el);
+
+var vm5 = new Vue({
+   el: '#app5',
+   data: {
+        title: 'Hello from vm5 '
+   },
+    beforeCreate: function () {
+        console.log('BeforeCreate()');
+    },
+    created: function () {
+        console.log('Created()');
+    },
+    beforeMount: function () {
+        console.log('beforeMount()');
+    },
+    mounted: function () {
+        console.log('mounted()');
+    },
+    beforeUpdate: function () {
+        console.log('beforeUpdate()');
+    },
+    updated: function () {
+        console.log('updated()');
+    },
+    beforeDestroy: function () {
+        console.log('beforeDestroy()');
+    },
+    destroyed: function () {
+        console.log('destroy()');
+    },
+    methods: {
+       destroy: function () {
+           this.$destroy();
+       }
+    }
+
+});
