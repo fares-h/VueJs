@@ -1,3 +1,9 @@
+
+Vue.component('new-component', {
+   template: '<h1>New Template created here!</h1>'
+});
+
+
 var data = {
   title: 'The VueJS Instance',
   showParagraph: false
