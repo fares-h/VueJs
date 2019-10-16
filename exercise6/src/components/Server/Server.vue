@@ -16,6 +16,12 @@
 
             }
         },
+        created() {
+            /*serverBus.$on('changeToNormal', (id) => {
+                if(this.server.id === id)
+                    this.server.status= 'Normal';
+            })*/
+        },
         methods: {
             serverSelected() {
                 serverBus.$emit('serverSelected', this.server)

@@ -3,6 +3,7 @@
         <p>Server Details are currently not updated</p>
         <p v-if="!server">Please select a Server</p>
         <p v-else>Server #{{server.id}} and status is: {{ server.status }}</p>
+        <button @click="changeToNormal">Change to Normal</button>
     </div>
 </template>
 
@@ -19,6 +20,12 @@
             serverBus.$on('serverSelected', (server) => {
                 this.server = server;
             })
+        },
+        methods: {
+            changeToNormal() {
+                //serverBus.$emit('changeToNormal', this.server.id);
+                this.server.status = 'Normal'; // it is the same as $emit but here we can do like that cuz server is object and we deal with the Object it self not with copy
+            }
         }
     }
 </script>
