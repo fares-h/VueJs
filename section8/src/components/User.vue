@@ -7,10 +7,10 @@
         <hr>
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <app-user-detail :myName="name" :userName="userName" :age="age" @nameWasReset="name = $event" :resetFn="resetName"></app-user-detail>
+                <app-user-detail :myName="name" :userName="userName" :userAge="age" @nameWasReset="name = $event" :resetFn="resetName" @ageReseted="age = $event"></app-user-detail>
             </div>
             <div class="col-xs-12 col-sm-6">
-                <app-user-edit></app-user-edit>
+                <app-user-edit :userAge="age" @ageWasEdited="age = $event"></app-user-edit>
             </div>
         </div>
     </div>

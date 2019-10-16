@@ -4,9 +4,10 @@
         <p>Many Details</p>
         <p>Name: {{ switchName() }}</p>
         <p>User Name: {{userName}}</p>
-        <p>Age: {{age}}</p>
+        <p>Age: {{userAge}}</p>
         <button @click="resetName">Reset Name</button>
         <button @click="resetFn">Reset Name from Parent</button>
+        <button @click="resetAge">Reset Age</button>
 
     </div>
 </template>
@@ -19,7 +20,8 @@
                 type: String,
                 required: true
             },
-            age: {
+            userAge: {
+                type: Number,
                 default: 20
             },
             resetFn: {
@@ -33,6 +35,10 @@
             resetName() {
                  this.myName = 'Max';
                  this.$emit('nameWasReset', this.myName);
+            },
+            resetAge() {
+                 this.userAge = 18;
+                 this.$emit('ageReseted', this.userAge);
             }
         }
     }
