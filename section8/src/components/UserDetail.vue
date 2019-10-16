@@ -5,6 +5,7 @@
         <p>Name: {{ switchName() }}</p>
         <p>User Name: {{userName}}</p>
         <p>Age: {{age}}</p>
+        <button @click="resetName">Reset Name</button>
     </div>
 </template>
 
@@ -23,7 +24,11 @@
         methods: {
              switchName() {
                  return this.myName.split("").reverse().join("");
-             }
+             },
+            resetName() {
+                 this.myName = 'Max';
+                 this.$emit('nameWasReset', this.myName);
+            }
         }
     }
 </script>
