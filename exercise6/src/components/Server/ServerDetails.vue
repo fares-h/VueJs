@@ -1,18 +1,24 @@
 <template>
     <div class="col-xs-12 col-sm-6">
         <p>Server Details are currently not updated</p>
-        <button @click="resetToNormal">Reset all Servers to Normal</button>
+        <p v-if="!server">Please select a Server</p>
+        <p v-else>Server #{{server.id}} and status is: {{ server.status }}</p>
     </div>
 </template>
 
 <script>
-    import { eventBus } from '../../main';
+    import { serverBus } from '../../main';
     export default {
         name: "ServerDetails",
-        methods: {
-            resetToNormal() {
-                eventBus.$emit('resetToNormal', 'Normal')
+        data() {
+            return {
+                server: null
             }
+        },
+        created() {
+            serverBus.$on('serverSelected', (server) => {
+                this.server = server;
+            })
         }
     }
 </script>

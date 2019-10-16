@@ -1,16 +1,16 @@
 <template>
     <div class="col-xs-12 col-sm-6">
         <ul class="list-group">
-           <server></server>
+           <app-server v-for="server in servers"
+                    :server="server"></app-server>
         </ul>
     </div>
 </template>
 
 <script>
-    import { eventBus } from '../../main';
     import Server from './Server'
     export default {
-        name: "Server",
+        name: "Servers",
         data: function () {
             return {
                 servers: [
@@ -22,18 +22,7 @@
             }
         },
         components: {
-            Server
-        },
-        created() {
-            eventBus.$on('resetToNormal', (normal) => {
-
-                for(var i=0; i< this.servers.length; i++) {
-                    this.servers[i].status = normal;
-                }
-            })
-        },
-        methods: {
-
+            appServer: Server
         }
     }
 </script>

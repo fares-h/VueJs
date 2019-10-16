@@ -9,7 +9,7 @@ Vue.component('server-header', Header);
 Vue.component('server-body', Body);
 Vue.component('server-footer', Footer);
 
-export const eventBus = new Vue();
+export const serverBus = new Vue();
 
 new Vue({
   el: '#app',

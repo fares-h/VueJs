@@ -1,37 +1,25 @@
 <template>
-    <li class="list-group-item" v-for="server in servers"  >
-        <p>Server #{{ server.id }} is: {{ server.status }}</p>
+    <li class="list-group-item"
+        style="cursor: pointer"
+        @click="serverSelected">
+        <p>Server #{{ server.id }} </p>
     </li>
 </template>
 
 <script>
-    import { eventBus } from '../../main';
+    import { serverBus } from '../../main';
 
     export default {
         name: "Server",
-        data: function () {
-            return {
-                servers: [
-                    {id: 1 , status: 'Normal'},
-                    {id: 2 , status: 'Critical'},
-                    {id: 3 , status: 'Unknown'},
-                    {id: 4 , status: 'Normal'}
-                ]
+        props: {
+            server: {
+
             }
         },
-        components: {
-            Server
-        }
-        created() {
-            eventBus.$on('resetToNormal', (normal) => {
-
-                for(var i=0; i< this.servers.length; i++) {
-                    this.servers[i].status = normal;
-                }
-            })
-        },
         methods: {
-
+            serverSelected() {
+                serverBus.$emit('serverSelected', this.server)
+            }
         }
     }
 </script>
