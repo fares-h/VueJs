@@ -1,12 +1,19 @@
 <template>
     <div class="col-xs-12 col-sm-6">
         <p>Server Details are currently not updated</p>
+        <button @click="resetToNormal">Reset all Servers to Normal</button>
     </div>
 </template>
 
 <script>
+    import { eventBus } from '../../main';
     export default {
-        name: "ServerDetails"
+        name: "ServerDetails",
+        methods: {
+            resetToNormal() {
+                eventBus.$emit('resetToNormal', 'Normal')
+            }
+        }
     }
 </script>
 

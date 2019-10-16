@@ -1,12 +1,14 @@
 <template>
-    <li class="list-group-item" v-for="server in servers"  >
-        <p>Server #{{ server.id }} is: {{ server.status }}</p>
-    </li>
+    <div class="col-xs-12 col-sm-6">
+        <ul class="list-group">
+           <server></server>
+        </ul>
+    </div>
 </template>
 
 <script>
     import { eventBus } from '../../main';
-
+    import Server from './Server'
     export default {
         name: "Server",
         data: function () {
@@ -21,7 +23,7 @@
         },
         components: {
             Server
-        }
+        },
         created() {
             eventBus.$on('resetToNormal', (normal) => {
 
