@@ -6,7 +6,7 @@
         <hr>
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <app-user-detail :myName="name" :userName="userName"></app-user-detail>
+                <app-user-detail :myName="name" :userName="userName" :age="age"></app-user-detail>
             </div>
             <div class="col-xs-12 col-sm-6">
                 <app-user-edit></app-user-edit>
@@ -23,7 +23,8 @@
         data: function () {
             return {
                 name: 'max',
-                userName: 'maxi1234'
+                userName: 'maxi1234',
+                age: 18
             };
         },
         methods: {
