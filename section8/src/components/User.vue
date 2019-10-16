@@ -6,7 +6,7 @@
         <hr>
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <app-user-detail :name="name"></app-user-detail>
+                <app-user-detail :name="name" :userName="userName"></app-user-detail>
             </div>
             <div class="col-xs-12 col-sm-6">
                 <app-user-edit></app-user-edit>
@@ -22,7 +22,8 @@
     export default {
         data: function () {
             return {
-                name: 'max'
+                name: 'max',
+                userName: 'maxi1234'
             };
         },
         methods: {
