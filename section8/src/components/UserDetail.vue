@@ -6,6 +6,8 @@
         <p>User Name: {{userName}}</p>
         <p>Age: {{age}}</p>
         <button @click="resetName">Reset Name</button>
+        <button @click="resetFn">Reset Name from Parent</button>
+
     </div>
 </template>
 
@@ -19,6 +21,9 @@
             },
             age: {
                 default: 20
+            },
+            resetFn: {
+                type: Function
             }
         },
         methods: {
