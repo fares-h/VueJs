@@ -2,15 +2,25 @@
     <div class="component">
         <h1>The User Component</h1>
         <p>I'm an awesome User!</p>
-        <p>Name: {{name}}</p>
-        <button @click="changeName">Change my Name</button>
+        <p>My Name is: {{ userName }}</p>
+        <p>My Age is: {{ userAge }}</p>
+        <button @click="changeNameAndAge">Change Name</button>
         <hr>
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <app-user-detail :myName="name" :userName="userName" :userAge="age" @nameWasReset="name = $event" :resetFn="resetName" @ageReseted="age = $event"></app-user-detail>
+                <app-user-detail :userName="userName"
+                                 :userAge="userAge"
+                                 @userNameReseted=" userName = $event"
+                                 :resetNameParent="resetName">
+
+                </app-user-detail>
             </div>
             <div class="col-xs-12 col-sm-6">
-                <app-user-edit :userAge="age" @ageWasEdited="age = $event"></app-user-edit>
+                <app-user-edit :userAge="userAge"
+                               :userName="userName"
+                                @ageChanged=" userAge = $event">
+
+                </app-user-edit>
             </div>
         </div>
     </div>
@@ -21,20 +31,20 @@
     import UserEdit from './UserEdit.vue';
 
     export default {
-        data: function () {
-            return {
-                name: 'max',
-                userName: 'maxi1234',
-                age: 18
-            };
+        data: function() {
+          return {
+              userName: 'Hani',
+              userAge: 26
+          };
         },
-        methods: {
-            changeName: function () {
-                this.name = 'Anna'
-            },
-            resetName() {
-                this.name = ' Max'
-            }
+        methods:{
+          changeNameAndAge() {
+              this.userName = 'Rami';
+              this.userAge = 24;
+          },
+          resetName() {
+              this.userName = 'Hani';
+          }
         },
         components: {
             appUserDetail: UserDetail,

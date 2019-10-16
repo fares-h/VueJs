@@ -2,44 +2,40 @@
     <div class="component">
         <h3>You may view the User Details here</h3>
         <p>Many Details</p>
-        <p>Name: {{ switchName() }}</p>
-        <p>User Name: {{userName}}</p>
-        <p>Age: {{userAge}}</p>
-        <button @click="resetName">Reset Name</button>
-        <button @click="resetFn">Reset Name from Parent</button>
-        <button @click="resetAge">Reset Age</button>
-
+        <p>Here is also my Name: {{ userName }}</p>
+        <p>And my Age: {{ userAge }}</p>
+        <button @click="resetNameHere">Reset Name form here </button>
+        <button @click="resetNameParent">Reset Name from Parent</button>
     </div>
 </template>
 
 <script>
+    import { eventBus } from '../main';
     export default {
-        props: {
-            myName: [String, Array],
+        props:{
             userName: {
                 type: String,
                 required: true
             },
             userAge: {
                 type: Number,
-                default: 20
+                required: true
             },
-            resetFn: {
+            resetNameParent: {
                 type: Function
             }
         },
         methods: {
-             switchName() {
-                 return this.myName.split("").reverse().join("");
-             },
-            resetName() {
-                 this.myName = 'Max';
-                 this.$emit('nameWasReset', this.myName);
-            },
-            resetAge() {
-                 this.userAge = 18;
-                 this.$emit('ageReseted', this.userAge);
+            resetNameHere() {
+                this.userName = 'Hani';
+                this.$emit('userNameReseted', this.userName);
             }
+        },
+        created () {
+            eventBus.$on('ageChanged', (name, age)=> {
+                this.userName = name;
+                this.userAge = age ;
+            });
         }
     }
 </script>
