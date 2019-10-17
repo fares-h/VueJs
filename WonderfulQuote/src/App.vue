@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <component :is="appHeader" :numOfQuotes="numOfQuotes"></component>
-        <app-body>
+        <app-body @quoteDeleted="numOfQuotes--">
 
         </app-body>
         <app-footer></app-footer>

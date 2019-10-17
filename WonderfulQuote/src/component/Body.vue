@@ -17,7 +17,6 @@
         data() {
             return {
                 quotes: [
-                    'just one Quote to see'
                 ],
                 maxQuotes: 10
             }
@@ -27,14 +26,16 @@
         },
         created() {
             quoteBus.$on('quoteDeleted', (index) => {
-                delete (this.quotes[index]);
-                alert(this.quotes.length);
+                this.quotes.splice(index,1);
+                this.$emit('quoteDeleted');
+                //alert(this.quotes.length);
             })
         },
         methods: {
             addQuote () {
-                if(this.$refs.textArea.value === '' || this.quotes.length > 10) {
-                    alert ('Write a Quote')
+                if(this.$refs.textArea.value === '' || this.quotes.length >= 10) {
+                    alert ('Write a Quote');
+                    this.$refs.textArea.value = '';
                 } else {
                     this.quotes.push(this.$refs.textArea.value);
                     this.$refs.textArea.value = '';
