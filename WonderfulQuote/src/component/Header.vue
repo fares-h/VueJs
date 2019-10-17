@@ -8,31 +8,47 @@
 </template>
 
 <script>
+    import {quoteBus} from '../main';
+
     export default {
         name: "Header",
-        props: ['numOfQuotes'],
         created() {
-
+            quoteBus.$on('quoteAdded', () => {
+                this.addOneQuote();
+            });
+            quoteBus.$on('quoteDeleted', () => {
+                this.deleteOneQuote();
+            });
         },
         data() {
             return {
                 progressBarStyle: {
                     width: '0%',
-                }
+                },
+                numOfQuotes: 0
             }
         },
-        watch:{
-            numOfQuotes (event) {
-               this.progressBarStyle.width = this.numOfQuotes +'0%';
+        methods: {
+            addOneQuote() {
+                this.numOfQuotes++;
+            },
+            deleteOneQuote(){
+                this.numOfQuotes--;
+            }
+        },
+        watch: {
+            numOfQuotes(event) {
+                this.progressBarStyle.width = this.numOfQuotes + '0%';
             }
         }
     }
 </script>
 
 <style scoped>
-    .quotesHeader{
+    .quotesHeader {
         margin: 5% auto;
     }
+
     .progress {
         margin: auto;
         text-align: center;

@@ -1,5 +1,5 @@
 <template>
-    <div class="alert alert-secondary" role="alert">
+    <div class="alert alert-info text-center" role="alert">
         Info: Click on a Quote to delete it
     </div>
 </template>
@@ -11,12 +11,4 @@
 </script>
 
 <style scoped>
-    .alert{
-        background-color: #cce5ff;
-        color: #004085;
-        border-color:#b8daff;
-        margin: 5% auto;
-        text-align: center;
-    }
-
 </style>

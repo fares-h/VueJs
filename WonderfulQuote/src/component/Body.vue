@@ -27,13 +27,12 @@
         created() {
             quoteBus.$on('quoteDeleted', (index) => {
                 this.quotes.splice(index,1);
-                this.$emit('quoteDeleted');
                 //alert(this.quotes.length);
             })
         },
         methods: {
             addQuote () {
-                if(this.$refs.textArea.value === '' || this.quotes.length >= 10) {
+                if(this.$refs.textArea.value === '' || this.quotes.length >= this.maxQuotes) {
                     alert ('Write a Quote');
                     this.$refs.textArea.value = '';
                 } else {

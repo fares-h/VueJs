@@ -19,7 +19,6 @@
                 quoteBus.$emit('quoteDeleted', index);
             }
         }
-
     }
 </script>
 

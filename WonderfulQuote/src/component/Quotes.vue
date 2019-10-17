@@ -13,12 +13,7 @@
         components: {
             Quote
         },
-        props:['quotes'],
-        data() {
-            return {
-            }
-        },
-
+        props: ['quotes'],
     }
 </script>
 
