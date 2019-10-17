@@ -1,12 +1,11 @@
 <template>
-    <div class="bodyContainer">
+    <div class="row">
         <div class="form-group">
             <label >Quote</label>
             <textarea class="form-control" ref="textArea"  rows="3" ></textarea>
         </div>
-        <button type="button" class="btn btn-primary" @click="addQuote">Add Quote</button>
-        <app-quotes :quoteText="quoteText"></app-quotes>
-
+        <button type="button" class="btn btn-primary" @click.prevent="addQuote">Add Quote</button>
+        <app-quotes :quotes="quotes"></app-quotes>
     </div>
 </template>
 
@@ -17,17 +16,31 @@
         name: "Body",
         data() {
             return {
-                quoteText: '',
+                quotes: [
+                    'just one Quote to see'
+                ],
+                maxQuotes: 10
             }
         },
         components: {
             appQuotes: Quotes
         },
+        created() {
+            quoteBus.$on('quoteDeleted', (index) => {
+                delete (this.quotes[index]);
+                alert(this.quotes.length);
+            })
+        },
         methods: {
             addQuote () {
-                this.quoteText = this.$refs.textArea.value;
-                this.$refs.textArea.value = '';
-                quoteBus.$emit('quoteAdded')
+                if(this.$refs.textArea.value === '' || this.quotes.length > 10) {
+                    alert ('Write a Quote')
+                } else {
+                    this.quotes.push(this.$refs.textArea.value);
+                    this.$refs.textArea.value = '';
+                    quoteBus.$emit('quoteAdded')
+                }
+
             }
         }
     }

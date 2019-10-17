@@ -1,26 +1,39 @@
 <template>
-    <div>
-        <p>{{ quoteText }}</p>
+    <div class="col-sm-6 col-md-4 col-lg-3" @click.prevent="deleteQuote(index)">
+        <div class="panel panel-default">
+            <div class="panel-body quote" >
+                <slot ></slot>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    import {quoteBus} from "../main";
+
     export default {
         name: "Quote",
-        props: {
-            quoteText: {
-                type: String
+        props:['index'],
+        methods: {
+            deleteQuote(index) {
+                quoteBus.$emit('quoteDeleted', index);
             }
         }
+
     }
 </script>
 
 <style scoped>
-    div{
-        border: 2px solid #ccc;
-        margin: 5% auto;
-        width: 30%;
-        float: left;
-        text-align: center;
+    .panel-body {
+        font-family: 'Arizonia', cursive;
+        font-size: 24px;
+        color: #6e6e6e;
+    }
+
+    .quote {
+        cursor: pointer;
+    }
+    .quote:hover {
+        background-color: #ffe2e2;
     }
 </style>

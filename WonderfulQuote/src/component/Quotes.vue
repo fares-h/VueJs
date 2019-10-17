@@ -1,8 +1,9 @@
 <template>
-    <div >
-        <quote :quoteText="quoteText" ></quote>
+    <div class="row" >
+        <quote  v-for="(quote,index) in quotes" :index="index" >
+               <p>{{ quote }}</p>
+        </quote>
     </div>
-
 </template>
 
 <script>
@@ -12,12 +13,12 @@
         components: {
             Quote
         },
-        props:['quoteText'],
+        props:['quotes'],
         data() {
             return {
-
             }
-        }
+        },
+
     }
 </script>
 
